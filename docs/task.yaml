@@ -1,0 +1,116 @@
+paths:
+  /tasks:
+    get:
+      tags:
+      - "Task"
+      summary: "Get all tasks"
+      description: "This API retrieves all tasks for the logged-in user."
+      operationId: "GetTasks"
+      security:
+        - bearerAuth: []
+      responses:
+        200:
+          description: "Successful operation"
+        401:
+          description: "Unauthorized"
+        500:
+          description: "Internal Server Error"
+
+    post:
+      tags:
+      - "Task"
+      summary: "Create a new task"
+      description: "This API creates a new task for the logged-in user."
+      operationId: "CreateTask"
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                description:
+                  type: string
+                dueDate:
+                  type: string
+                  format: date-time
+      responses:
+        201:
+          description: "Task created successfully"
+        400:
+          description: "Bad request"
+        401:
+          description: "Unauthorized"
+        500:
+          description: "Internal Server Error"
+
+  /tasks/{taskId}:
+    put:
+      tags:
+      - "Task"
+      summary: "Update an existing task"
+      description: "This API updates an existing task."
+      operationId: "UpdateTask"
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: taskId
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                description:
+                  type: string
+                dueDate:
+                  type: string
+                  format: date-time
+      responses:
+        200:
+          description: "Task updated successfully"
+        400:
+          description: "Bad request"
+        401:
+          description: "Unauthorized"
+        404:
+          description: "Task not found"
+        500:
+          description: "Internal Server Error"
+
+    delete:
+      tags:
+      - "Task"
+      summary: "Delete an existing task"
+      description: "This API deletes an existing task."
+      operationId: "DeleteTask"
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: taskId
+          required: true
+          schema:
+            type: string
+      responses:
+        204:
+          description: "Task deleted successfully"
+        400:
+          description: "Bad request"
+        401:
+          description: "Unauthorized"
+        404:
+          description: "Task not found"
+        500:
+          description: "Internal Server Error"
