@@ -1,6 +1,5 @@
 
 //MVC 
-
 const express = require('express');
 const mongoose = require('mongoose');
 const userRoutes = require('./routes/userRoutes');
@@ -20,7 +19,9 @@ const MONGO_URL = 'mongodb://127.0.0.1:27017/Punya_Node';
 app.use(express.json());
 
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
+
 // app.get("/",function(req, res){return res.send("Home Route")}) 
+
 app.use('/users', userRoutes);
 app.use('/tasks', taskRoutes);
 
